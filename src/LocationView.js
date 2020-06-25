@@ -44,8 +44,12 @@ export default class LocationView extends React.Component {
     enableHighAccuracy: true
   };
 
+
   constructor(props) {
     super(props);
+    this.state={
+      margin:1
+    }
     if (Platform.OS === 'android') {
       UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
     }
@@ -136,9 +140,10 @@ export default class LocationView extends React.Component {
       <View style={styles.container}>
         <MapView
           ref={mapView => (this._map = mapView)}
-          style={styles.mapView}
+          style={[styles.mapView ,{borderBottomWidth:this.state.margin} ]}
           region={this.state.region}
-          showsMyLocationButton={true}
+          showsMyLocationButton
+          onMapReady={() => this.setState({margin:0})}
           showsUserLocation={true}
           onPress={({ nativeEvent }) => this._setRegion(nativeEvent.coordinate)}
           onRegionChange={this._onMapRegionChange}
