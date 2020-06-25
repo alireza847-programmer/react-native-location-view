@@ -87,7 +87,7 @@ export default class LocationView extends React.Component {
   };
 
   _onMapRegionChangeComplete = region => {
-    this._input.fetchAddressForLocation(region);
+    // this._input.fetchAddressForLocation(region);
   };
 
   _onTextFocus = () => {
@@ -139,7 +139,7 @@ export default class LocationView extends React.Component {
           style={styles.mapView}
           region={this.state.region}
           showsMyLocationButton={true}
-          showsUserLocation={false}
+          showsUserLocation={true}
           onPress={({ nativeEvent }) => this._setRegion(nativeEvent.coordinate)}
           onRegionChange={this._onMapRegionChange}
           onRegionChangeComplete={this._onMapRegionChangeComplete}
@@ -150,24 +150,19 @@ export default class LocationView extends React.Component {
           color={this.props.markerColor}
           style={{ backgroundColor: 'transparent' }}
         />
-        <View style={styles.fullWidthContainer}>
+        {/* <View style={styles.fullWidthContainer}>
           <AutoCompleteInput
             ref={input => (this._input = input)}
             apiKey={this.props.apiKey}
             style={[styles.input, { transform: [{ scale: inputScale }] }]}
             debounceDuration={this.props.debounceDuration}
             components={this.props.components}
-          />
-        </View>
-        <TouchableOpacity
-          style={[styles.currentLocBtn, { backgroundColor: this.props.markerColor }]}
-          onPress={this._getCurrentLocation}
-        >
-          <MaterialIcons name={'my-location'} color={'white'} size={25} />
-        </TouchableOpacity>
+          />  
+        </View> */}
+       
         <TouchableOpacity
           style={[styles.actionButton, this.props.actionButtonStyle]}
-          onPress={() => this.props.onLocationSelect({ ...this.state.region, address: this._input.getAddress(), placeDetails: this.state.placeDetails })}
+          onPress={() => this.props.onLocationSelect({ ...this.state.region,  placeDetails: this.state.placeDetails })}
         >
           <View>
             <Text style={[styles.actionText, this.props.actionTextStyle]}>{this.props.actionText}</Text>
